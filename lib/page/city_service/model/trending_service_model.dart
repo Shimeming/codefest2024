@@ -17,7 +17,7 @@ abstract final class TrendingServiceModel {
       TrendingService(
         icon: Assets.svg.iconLocationSearch.svg(),
         title: '施工資訊',
-        url: '',
+        url: 'https://codefest2024-bm3n7d2hk-shimemings-projects.vercel.app/',
       ),
       // 在此列表後加入新熱門按鈕
       // add new trending service button here
