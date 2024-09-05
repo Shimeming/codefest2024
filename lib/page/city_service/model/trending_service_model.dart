@@ -19,6 +19,11 @@ abstract final class TrendingServiceModel {
         title: '施工資訊',
         url: 'https://codefest2024.vercel.app/',
       ),
+      TrendingService(
+        icon: Assets.svg.iconLocationSearch.svg(),
+        title: 'Google ',
+        url: 'https://www.google.com/',
+      ),
       // 在此列表後加入新熱門按鈕
       // add new trending service button here
     ];
