@@ -1,48 +1,36 @@
-'use client';
-import {useState ,useEffect} from "react";
-import { info } from "console";
-import { resolve } from "path";
-// declare let flutterObject: any;
-
-// let before_string 
-// 定義接收資料並處理的邏輯
-// const flutterObject = window.flutterObject;
-// export async function fetchUserData(command_str: string) : Promise<string> {
-//   return new Promise(
-//     (resolve,reject)=>{  
-//       flutterObject.postMessage(command_str); // 通知 RiceballFan_home.tsx 開始載入資料
-//     }
-//   )
-//   //Using Callback function to get message in flutterObject.data  
-// }
-// using 
-
-// const [infoState, setInfoState] = useState<boolean>(false);
-// const [locState, setLocState] = useState<boolean>(false);
-// const [deviceState, setDeviceState] = useState<boolean>(false);
-
+export let info_state : boolean = false;
+export let loc_state : boolean = false;
+export let device_state : boolean   = false;
+export let status_print : string = "null";
 
 const messageListener = (event: MessageEvent) => {
-  if(flutterObject!== "undefined") {
+  if(flutterObject !== "undefined") {
+    status_print = "flutterObject exists";
     let temp_str : string = event.data;
     console.log("temp_str: ",temp_str);
-    // transfer into json and get the data
     let temp_json = JSON.parse(temp_str);
     if(temp_json.name === "userinfo"){
       GotUserInfo = temp_str;
+      info_state = true;
       console.log("[DEBUG] GotUserInfo: ");
     }
     else if(temp_json.name === "location"){
       GotUserLoc = temp_str;
+      loc_state = true;
       console.log("[DEBUG] GotUserLoc: ");
     }
     else if(temp_json.name === "deviceinfo"){
       GotUserDevice = temp_str;
+      device_state = true;
+    // }else if (temp_json.name === "phone_number"){
     }
     else{
       console.log("error");
     }
   }
+  console.log("info_state: ",info_state);
+  console.log("loc_state: ",loc_state);
+  console.log("device_state: ",device_state);
 }
 let getUserInfoCommand : string = '{  "name": "userinfo", "data": null }';
 let getUserLocCommand  : string = '{  "name": "location", "data": null }';
