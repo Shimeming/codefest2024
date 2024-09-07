@@ -58,9 +58,9 @@ export function GetUserFromApp(){
     GotUserLoc = "FlutterObject exists";
   } else {
     console.log("flutterObject 不存在，無法執行操作。");
-    GotUserLoc = "error-no-flutterObject";
+    GotUserLoc = "error-no-flutterObject\ntrying nexxt time";
   }
-  
+
   // if(typeof flutterObject!== "undefined"){
   //   console.log("error,exit");
   //   return;
