@@ -1,5 +1,5 @@
 // 
-
+import {useState ,useEffect} from "react";
 import { info } from "console";
 import { resolve } from "path";
 // declare let flutterObject: any;
@@ -70,8 +70,10 @@ export function GetUserFromApp(){
     flutterObject.postMessage(getUserInfoCommand);
     // flutterObject.postMessage(getUserLaunchMap);
     flutterObject.postMessage(getUserDevInfoCommand);
-    flutterObject.postMessage(getUserDevInfoCommand);
+    // flutterObject.postMessage(getUserDevInfoCommand);
     flutterObject.postMessage(getUserLocCommand);
+
+
     console.log("wait for ok",1000);
     if(info_state !== true || loc_state !== true || device_state !== true){
       //wait for ok
