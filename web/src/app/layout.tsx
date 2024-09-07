@@ -1,5 +1,6 @@
 import { type Metadata } from 'next';
 import './globals.css';
+import NavBar from '@/components/nav-bar';
 
 export const metadata: Metadata = {
   title: {
@@ -13,6 +14,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }): React.JSX.Elem
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
+        <div className="w-full flex-none md:w-64">
+          <NavBar />
+        </div>
         {children}
       </body>
     </html>

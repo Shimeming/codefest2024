@@ -17,7 +17,7 @@ const Page = async () => {
 
   return (
     <>
-      <main className="flex flex-col items-center pt-16">
+      <main className="flex flex-col items-center pt-5">
         <NavCard />
       </main>
     </>

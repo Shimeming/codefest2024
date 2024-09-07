@@ -1,7 +1,8 @@
 'use client'
-import { ActivityButton } from '@/components/activity-button';
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
+import { type UserInfo } from '@/lib/definition';
+import { IoHomeOutline } from "react-icons/io5";
 
 const slides = [
   {
@@ -32,18 +33,28 @@ const activities = [
   },
 ];
 
+const mockUser: UserInfo = {
+  id: '1234',
+  name: '金大森',
+  age: 27,
+  sex: '男',
+  district: '文山區',
+  motto: '在這個城市，尋找很大森的人。'
+}
+
 const NavCards = (): JSX.Element => {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()])
 
   return (
     <div className="
-      flex flex-col h-[80vh] max-w-[90vw]
-      bg-secondary-200
+      flex flex-col h-[85vh] max-w-[90vw]
+      bg-gray-300
       rounded-xl overflow-hidden
+      shadow-2xl shadow-gray-800
     ">
       <div
         className="
-          relative overflow-hidden w-full h-full
+          relative overflow-hidden w-full h-52
         "
       >
         <div
@@ -63,10 +74,50 @@ const NavCards = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="flex-auto basis-1/3 bg-slate-500">
-        test
+      <div
+        className="flex flex-col pt-6 mx-5 gap-2"
+        id="user info"
+      >
+        <div className="flex gap-2 justify-between content-end items-end">
+          <div className="flex gap-2 content-end items-end">
+            <p className="text-3xl font-bold">
+              {mockUser.name}
+            </p>
+            <p className="text-2xl">
+              {mockUser.age}
+            </p>
+          </div>
+          <div className="flex gap-2 content-end items-end justify-end">
+            <IoHomeOutline className="text-4xl" />
+            <div className="flex">
+              <p>{mockUser.district}</p>
+            </div>
+          </div>
+        </div>
+        <p id="motto">
+          {mockUser.motto}
+        </p>
       </div>
-      <div className="flex flex-col items-center gap-4 py-8 px-4">
+      <div className="flex-1 h-full p-4">
+        <div className="grid grid-cols-2 h-full gap-6">
+          <div className="flex flex-col">
+            <p>最愛活動</p>
+            <div className="rounded-xl bg-primary-600 flex-grow w-full"></div>
+          </div>
+          <div className="flex flex-col">
+            <p>想去的活動</p>
+            <div className="rounded-xl bg-primary-600 flex-grow w-full"></div>
+          </div>
+          <div className="col-span-2 flex flex-col">
+            <p>歷史活動紀錄</p>
+            <div className="grid grid-cols-2 gap-6 flex-grow">
+              <div className="rounded-xl bg-primary-600"></div>
+              <div className="rounded-xl bg-primary-600"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="flex flex-col items-center gap-4 py-8 px-4">
         {activities.map((activity) => {
           return (
             <ActivityButton
@@ -78,7 +129,7 @@ const NavCards = (): JSX.Element => {
             </ActivityButton>
           );
         })}
-      </div>
+      </div> */}
     </div >
   );
 };
