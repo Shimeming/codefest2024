@@ -47,8 +47,3 @@ CREATE TABLE Events (
     end_date DATE 
 );
 
-
-CREATE TABLE Friend_Relationship (
-    user1 INTEGER REFERENCES Users(id),
-    user2 INTEGER REFERENCES Users(id)
-);
