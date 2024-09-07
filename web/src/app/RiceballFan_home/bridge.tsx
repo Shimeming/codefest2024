@@ -89,6 +89,37 @@ export function GetUserFromApp(){
 
   return; 
 }
+
+function GetLocByuseEffect():string{
+  const [userLoc, setUserLoc] = useState<string>("null");
+  useEffect(() => {
+    GetUserFromApp();
+    const interval = setInterval(() => {
+      // 持續監測變數變化
+      setUserLoc(GotUserLoc);
+    }, 100); // 每0.1秒檢查一次狀態更新
+
+    return () => clearInterval(interval); // 清除計時器
+  }, [GotUserLoc]);
+  console.log("userLoc: ",userLoc);
+  return userLoc;
+}
+function GetUserInfoByuseEffect():string{
+  const [userInfo, setUserInfo] = useState<string>("null");
+  useEffect(() => {
+    GetUserFromApp();
+    const interval = setInterval(() => {
+      // 持續監測變數變化
+      setUserInfo(GotUserInfo);
+    }, 100); // 每0.1秒檢查一次狀態更新
+
+    return () => clearInterval(interval); // 清除計時器
+  }, [GotUserInfo]);
+  console.log("userInfo: ",userInfo);
+  return userInfo;
+}
+
+
         
         // flutterObject.postMessage(getUserInfoCommand);
   //       fetchUserData(getUserInfoCommand).then((data) => { GotUserInfo = data;} );
