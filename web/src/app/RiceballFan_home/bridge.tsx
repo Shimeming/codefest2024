@@ -20,9 +20,10 @@ declare let flutterObject: any;
 let info_state : boolean = false;
 let loc_state : boolean = false;
 let map_state : boolean   = false;
-
+export let status_print : string = "null";
 const messageListener = (event: MessageEvent) => {
   if(flutterObject!== "undefined") {
+    status_print = "flutterObject exists";
     let temp_str : string = event.data;
     console.log("temp_str: ",temp_str);
     // transfer into json and get the data
@@ -53,6 +54,7 @@ export let GotUserLaunchMap : string = "null";
 export function GetUserFromApp(){
   // flutterObject 已存在，可以執行操作
   if (typeof flutterObject !== "undefined" && flutterObject) {
+    GotUserLoc = "FlutterObject exists";
   } else {
     console.log("flutterObject 不存在，無法執行操作。");
     GotUserLoc = "error-no-flutterObject";

@@ -1,5 +1,5 @@
 
-import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc } from "./bridge";
+import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc , status_print} from "./bridge";
 
 // function sendMessageToFlutter(message: string) {
 //   if (typeof window.flutterObject !== "undefined" && window.flutterObject) {
@@ -13,7 +13,7 @@ import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc } from "./bri
 // sendMessageToFlutter("Hello from web!");
 
 const Page = () => {
-    // GetUserFromApp();
+    GetUserFromApp();
     return (
         <div>
             <h1>Test Page</h1>
@@ -23,7 +23,8 @@ const Page = () => {
             <p>{GotUserLaunchMap}</p>
             {/* print GotUserLoc... on page */}
             <p>{GotUserLoc}</p>
-
+            
+            <p>{status_print}</p>
 
         </div>
     );
