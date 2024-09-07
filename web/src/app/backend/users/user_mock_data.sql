@@ -1,4 +1,4 @@
-INSERT INTO Users (user_name, real_name, sex, age, image_url, self_intro, city, town, longitude, latitude, perference_score, event_history_id, favorite_event, interest_event) VALUES
+INSERT INTO Users (user_name, real_name, sex, age, image_url, motto, city, town, longitude, latitude, perference_score, event_history_id, favorite_event, interest_event) VALUES
 ('Wesley', '金大森', '1', '27', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREURSKMljVXEm57DuInU5lTToyHcaiYmWnmA&s', '在這個城市，尋找很大森的人', '臺北市', '中山區', '121.533', '25.068', ARRAY[0, 0, 3, 4, 2, 0], ARRAY[1, 2, 4], 1, 5),
 
 

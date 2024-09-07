@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION Count_Relation(user1 INTEGER, user2 INTEGER) RETURNS NUMERIC
+CREATE OR REPLACE FUNCTION Calculate_Relation(user1 INTEGER, user2 INTEGER) RETURNS NUMERIC
 AS $$
 DECLARE
     total_score NUMERIC := 0;
@@ -28,32 +28,49 @@ BEGIN
 END;
 $$ LANGUAGE PLPGSQL;
 
+CREATE OR REPLACE FUNCTION Calculate_Distance(user1 INTEGER, user2 INTEGER) RETURNS NUMERIC
+AS $$
+DECLARE
+    long1 NUMERIC;
+    la1 NUMERIC;
+    long2 NUMERIC;
+    la2 NUMERIC;
+BEGIN
+    SELECT longitude, latitude INTO long1, la1
+    FROM Users 
+    WHERE id = user1;
+    SELECT longitude, latitude INTO long2, la2
+    FROM Users 
+    WHERE id = user2;
 
+    RETURN SQRT(POWER((long1-long2)*111, 2) + POWER((la1-la2)*111, 2));
+END;
+$$ LANGUAGE PLPGSQL;
 
 CREATE OR REPLACE FUNCTION Relation_Ranking(user_id INTEGER) RETURNS TABLE (
     name TEXT, sex INTEGER, age INTEGER,
     image_url TEXT, self_intro TEXT,
     city TEXT, town TEXT,
-    relative_score NUMERIC
+    relative_score NUMERIC,
+    distance NUMERIC
 )
 AS $$
 BEGIN
 
     EXECUTE format('
-        CREATE OR REPLACE VIEW User_Relation_Score AS
-        SELECT id, Count_Relation(%L, id) as relative_score
-        FROM Users', user_id);
+        CREATE OR REPLACE VIEW User_Relation AS
+        SELECT id, Calculate_Relation(%L, id) as relative_score, Calculate_Distance(%L, id) as distance
+        FROM Users', user_id, user_id);
     
     RETURN QUERY (
-        SELECT u.user_name, u.sex, u.age, u.image_url, u.self_intro, u.city, u.town, urs.relative_score
-        FROM User_Relation_Score urs
-        JOIN Users u on u.id = urs.id
+        SELECT u.user_name, u.sex, u.age, u.image_url, u.self_intro, u.city, u.town, ur.relative_score, ur.distance
+        FROM User_Relation ur
+        JOIN Users u on u.id = ur.id
         WHERE u.id <> user_id
-        ORDER BY urs.relative_score DESC
+        ORDER BY ur.relative_score DESC
     );
     
     DROP VIEW IF EXISTS User_Relation_Score;
 
 END;
 $$ LANGUAGE PLPGSQL;
-
