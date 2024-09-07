@@ -12,12 +12,14 @@
     "@vercel/postgres": "^0.10.0",
     "next": "14.2.8",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "vue": "^3.5.3"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/vue": "^1.0.31",
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
     "postcss": "^8",
