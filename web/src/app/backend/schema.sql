@@ -16,10 +16,12 @@ CREATE TABLE Users (
     longitude NUMERIC CHECK (longitude <= 180 AND longitude >= -180),
     latitude NUMERIC CHECK (latitude <= 90 AND latitude >= -90),
     
-    -- perference [art, tech, sport, garden, music, movie]
+    -- perference [art, tech, sport, life, music, movie]
     perference_score INTEGER[] DEFAULT ARRAY[0, 0, 0, 0, 0, 0],
 
-    -- event history
+    -- event
+    favorite_event INTEGER,
+    interest_event INTEGER,
     event_history_id INTEGER[]
 );
 
@@ -28,7 +30,7 @@ CREATE TYPE Event_Type AS ENUM (
     'Art',
     'Technology',
     'Sport',
-    'Garden',
+    'Life',
     'Music',
     'Movie'
 );
@@ -39,7 +41,9 @@ CREATE TABLE Events (
     name TEXT NOT NULL,
     image_url TEXT,
     event_url TEXT,
-    event_type Event_Type
+    event_type Event_Type,
+    start_date DATE,
+    end_date DATE 
 );
 
 

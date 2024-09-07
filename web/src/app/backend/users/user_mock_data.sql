@@ -1,4 +1,23 @@
-INSERT INTO Users (user_name, real_name, sex, image_url, longitude, latitude, perference_score) VALUES
+INSERT INTO Users (user_name, real_name, sex, age, image_url, self_intro, city, town, longitude, latitude, perference_score, event_history_id, favorite_event, interest_event) VALUES
+('Wesley', '金大森', '1', '27', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREURSKMljVXEm57DuInU5lTToyHcaiYmWnmA&s', '在這個城市，尋找很大森的人', '臺北市', '中山區', '121.533', '25.068', ARRAY[0, 0, 3, 4, 2, 0], ARRAY[1, 2, 4], 1, 5),
+
+
+
+
+
+
+
+
+
+
+INSERT INTO Users (user_name, real_name, sex, age, image_url, longitude, latitude, perference_score) VALUES
+('gheel0', 'Gipsy Heel', 1, 26,'htmyimage.com/174x100.png/dddddd/000000', 112.044491, 22.915094, ARRAY[0, 0, 3, 4, 2, 0]),
+('bpiddlesden1', 'Blaine Piddlesden', 2, 56, 'dummyimage.com/177x100.png/5fa2dd/ffffff', 121.3345633, 14.4392961, ARRAY[0, 3, 0, 0, 0, 0]),
+('cdavidai2', 'Coleman Davidai', 2, 43, 'httpmage.com/193x100.png/5fa2dd/ffffff', -46.8521864, -23.6515085, ARRAY[0, 4, 3, 0, 5, 0]),
+('jcatford3', 'Jessey Catford', 2, 24, 'htage.com/105x100.png/5fa2dd/ffffff', 34.073671, 52.3175333, ARRAY[4, 4, 0, 0, 0, 1]);
+
+
+
 ('gheel0', 'Gipsy Heel', 1, 'http://dummyimage.com/174x100.png/dddddd/000000', 112.044491, 22.915094, ARRAY[0, 0, 3, 4, 2, 0]),
 ('bpiddlesden1', 'Blaine Piddlesden', 2, 'http://dummyimage.com/177x100.png/5fa2dd/ffffff', 121.3345633, 14.4392961, ARRAY[0, 3, 0, 0, 0, 0]),
  ('cdavidai2', 'Coleman Davidai', 2, 'http://dummyimage.com/193x100.png/5fa2dd/ffffff', -46.8521864, -23.6515085, ARRAY[0, 4, 3, 0, 5, 0]),
