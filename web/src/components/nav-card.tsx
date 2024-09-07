@@ -1,8 +1,10 @@
 'use client'
-import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
-import { type UserInfo } from '@/lib/definition';
+import React from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import TinderCard from 'react-tinder-card';
 import { IoHomeOutline } from "react-icons/io5";
+import { type UserInfo } from '@/lib/definition';
 
 const slides = [
   {
@@ -13,7 +15,7 @@ const slides = [
     name: 'cover2',
     img: 'https://i.ytimg.com/vi/3IAHr044zao/maxresdefault.jpg'
   }
-]
+];
 
 const activities = [
   {
@@ -33,17 +35,27 @@ const activities = [
   },
 ];
 
-const mockUser: UserInfo = {
-  id: '1234',
-  name: '金大森',
-  age: 27,
-  sex: '男',
-  district: '文山區',
-  motto: '在這個城市，尋找很大森的人。'
-}
+const mockUsers: UserInfo[] = [
+  {
+    id: '1234',
+    name: '金大森',
+    age: 27,
+    sex: '男',
+    district: '文山區',
+    motto: '在這個城市，尋找很大森的人。'
+  },
+  {
+    id: '5678',
+    name: '李小美',
+    age: 25,
+    sex: '女',
+    district: '大安區',
+    motto: '在這裡做最好的自己。'
+  }
+];
 
-const NavCards = (): JSX.Element => {
-  const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()])
+const NavCard = ({ user }: { user: UserInfo }) => {
+  const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
 
   return (
     <div className="
@@ -68,6 +80,7 @@ const NavCards = (): JSX.Element => {
                 <img
                   src={slide.img}
                   className="w-full h-full object-cover"
+                  alt={slide.name}
                 />
               </div>
             ))}
@@ -81,21 +94,21 @@ const NavCards = (): JSX.Element => {
         <div className="flex gap-2 justify-between content-end items-end">
           <div className="flex gap-2 content-end items-end">
             <p className="text-3xl font-bold">
-              {mockUser.name}
+              {user.name}
             </p>
             <p className="text-2xl">
-              {mockUser.age}
+              {user.age}
             </p>
           </div>
           <div className="flex gap-2 content-end items-end justify-end">
             <IoHomeOutline className="text-4xl" />
             <div className="flex">
-              <p>{mockUser.district}</p>
+              <p>{user.district}</p>
             </div>
           </div>
         </div>
         <p id="motto">
-          {mockUser.motto}
+          {user.motto}
         </p>
       </div>
       <div className="flex-1 h-full p-4">
@@ -117,20 +130,32 @@ const NavCards = (): JSX.Element => {
           </div>
         </div>
       </div>
-      {/* <div className="flex flex-col items-center gap-4 py-8 px-4">
-        {activities.map((activity) => {
-          return (
-            <ActivityButton
-              key={activity.name}
-              href={activity.href}
-              name={activity.name}
-              picture={activity.picture}
-            >
-            </ActivityButton>
-          );
-        })}
-      </div> */}
     </div >
+  );
+};
+
+const NavCards = (): JSX.Element => {
+  const onSwipe = (direction: string, userName: string) => {
+    console.log(`You swiped ${direction} on ${userName}`);
+  };
+
+  const onCardLeftScreen = (userName: string) => {
+    console.log(`${userName} left the screen`);
+  };
+
+  return (
+    <div className="relative flex justify-center items-center h-[85vh] w-[90vw]">
+      {mockUsers.map((user) => (
+        <TinderCard
+          className="absolute"
+          key={user.id}
+          onSwipe={(dir) => onSwipe(dir, user.name)}
+          onCardLeftScreen={() => onCardLeftScreen(user.name)}
+        >
+          <NavCard user={user} />
+        </TinderCard>
+      ))}
+    </div>
   );
 };
 
