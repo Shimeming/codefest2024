@@ -43,13 +43,13 @@ BEGIN
     FROM Users 
     WHERE id = user2;
 
-    RETURN SQRT(POWER((long1-long2)*111, 2) + POWER((la1-la2)*111, 2));
+    RETURN ROUND(SQRT(POWER((long1-long2)*111, 2) + POWER((la1-la2)*111, 2)));
 END;
 $$ LANGUAGE PLPGSQL;
 
 CREATE OR REPLACE FUNCTION Relation_Ranking(user_id INTEGER) RETURNS TABLE (
     name TEXT, sex INTEGER, age INTEGER,
-    image_url TEXT, self_intro TEXT,
+    image_url TEXT, motto TEXT,
     city TEXT, town TEXT,
     relative_score NUMERIC,
     distance NUMERIC
@@ -63,7 +63,7 @@ BEGIN
         FROM Users', user_id, user_id);
     
     RETURN QUERY (
-        SELECT u.user_name, u.sex, u.age, u.image_url, u.self_intro, u.city, u.town, ur.relative_score, ur.distance
+        SELECT u.user_name, u.sex, u.age, u.image_url, u.motto, u.city, u.town, ur.relative_score, ur.distance
         FROM User_Relation ur
         JOIN Users u on u.id = ur.id
         WHERE u.id <> user_id
