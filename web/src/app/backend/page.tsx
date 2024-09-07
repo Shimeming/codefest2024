@@ -3,7 +3,6 @@ export type UserInfo = {
     id: string;
     user_name: string;
     real_name: string;
-    email: string;
     sex: string;
   };
 
