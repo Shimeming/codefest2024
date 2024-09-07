@@ -4,7 +4,7 @@ export const ActivityButton = ({
   href, picture, name
 }: {
   href: string;
-  picture: JSX.Element;
+  picture: string;
   name: string;
 }) => {
   return (
@@ -14,16 +14,18 @@ export const ActivityButton = ({
         relative flex justify-between
         rounded-xl min-w-72 shadow-xl overflow-hidden
         transition duration-300 ease-in-out
-        bg-primary-100 hover:bg-primary-300
+        bg-white hover:bg-primary-300
         p-4 pl-8
       "
     >
-      {picture}
       <div
-      className="
-        relative z-10 text-xl font-semibold
-      "
-      >
+        className="
+          absolute inset-0 bg-cover bg-center transition-opacity duration-300 ease-in-out
+          opacity-40 hover:opacity-50
+        "
+        style={{ backgroundImage: `url(${picture})` }}
+      />
+      <div className="relative z-10 text-xl font-semibold">
         {name}
       </div>
     </Link>

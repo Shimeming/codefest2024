@@ -1,5 +1,4 @@
 import NavCard from '@/components/nav-card';
-import { sql } from "@vercel/postgres";
 
 export type LatestInvoice = {
   id: string;
@@ -15,29 +14,11 @@ export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
 
 
 const Page = async () => {
-  const data = await sql<LatestInvoiceRaw>`
-    SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
-    FROM invoices
-    JOIN customers ON invoices.customer_id = customers.id
-    ORDER BY invoices.date DESC
-    LIMIT 5`;
-
-  const latestInvoices = data.rows.map((invoice) => ({
-    ...invoice,
-    amount: invoice.amount,
-  }));
 
   return (
     <>
       <main className="flex flex-col items-center pt-16">
         <NavCard />
-        <div>
-          {latestInvoices.map((invoice) => (
-            <div key={invoice.id}>
-              {invoice.id}
-            </div>
-          ))}
-        </div>
       </main>
     </>
   );
