@@ -47,12 +47,40 @@ BEGIN
 END;
 $$ LANGUAGE PLPGSQL;
 
+CREATE OR REPLACE TYPE EventInfo AS (
+    event_id INTEGER,
+    name TEXT,
+    image_url TEXT,
+    event_url TEXT,
+    event_type Event_Type,
+    place TEXT,
+    start_date DATE,
+    end_date DATE 
+)
+
+CREATE OR REPLACE FUNCTION Get_Event_Info(event_id INTEGER) RETURNS EventInfo
+AS $$
+DECLARE
+  result EventInfo;
+BEGIN
+    SELECT * INTO result
+    FROM Events
+    WHERE id = event_id;
+    
+    RETURN result;
+    
+END;
+$$ LANGUAGE PLPGSQL;
+
+
 CREATE OR REPLACE FUNCTION Relation_Ranking(user_id INTEGER) RETURNS TABLE (
     id INTEGER, name TEXT, sex INTEGER, age INTEGER,
-    image_url TEXT, motto TEXT,
+    image_url TEXT[], motto TEXT,
     city TEXT, town TEXT,
     relative_score NUMERIC,
-    distance NUMERIC
+    distance NUMERIC,
+    favorite_event EventInfo,
+    interest_event EventInfo
 )
 AS $$
 BEGIN
@@ -63,7 +91,10 @@ BEGIN
         FROM Users', user_id, user_id);
     
     RETURN QUERY (
-        SELECT u.id, u.user_name, u.sex, u.age, u.image_url, u.motto, u.city, u.town, ur.relative_score, ur.distance
+        SELECT u.id, u.user_name, u.sex, u.age, u.image_url, u.motto, u.city, u.town, 
+                ur.relative_score, ur.distance, 
+                Get_Event_Info(u.favorite_event),
+                Get_Event_Info(u.interest_event)
         FROM User_Relation ur
         JOIN Users u on u.id = ur.id
         WHERE u.id <> user_id
