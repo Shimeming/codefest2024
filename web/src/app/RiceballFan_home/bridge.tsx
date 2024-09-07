@@ -2,7 +2,7 @@
 
 import { info } from "console";
 import { resolve } from "path";
-declare let flutterObject: any;
+// declare let flutterObject: any;
 
 // let before_string 
 // 定義接收資料並處理的邏輯
@@ -73,7 +73,7 @@ export function GetUserFromApp(){
   } else {
 
     console.log("flutterObject 不存在，無法執行操作。");
-    GotUserLoc = "error-no-flutterObject QuQ lalala trying next time";
+    GotUserLoc = "error-no-flutterObject QuQ lalala QQQ trying next time";
     return;
   }
 
