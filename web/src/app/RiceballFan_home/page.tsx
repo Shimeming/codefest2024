@@ -14,6 +14,7 @@ import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc , status_prin
 
 const Page = () => {
     console.log("Waiting for flutterObject load...",2000);
+    // setTimeout(()=>{},2000);
     GetUserFromApp();
     return (
         <div>
