@@ -4,10 +4,15 @@ CREATE TABLE Users (
     user_name TEXT NOT NULL,
     real_name TEXT NOT NULL,
     sex INTEGER CHECK (sex IN (1, 2)),
+    age INTEGER CHECK (age > 0),
     image_url TEXT,
+    self_intro TEXT,
 
-    
-    -- location
+    -- residential  address
+    city TEXT,
+    town TEXT,
+
+    -- current location
     longitude NUMERIC CHECK (longitude <= 180 AND longitude >= -180),
     latitude NUMERIC CHECK (latitude <= 90 AND latitude >= -90),
     
@@ -16,8 +21,6 @@ CREATE TABLE Users (
 
     -- event history
     event_history_id INTEGER[]
-
-    -- TODO: friend list
 );
 
 
@@ -37,4 +40,10 @@ CREATE TABLE Events (
     image_url TEXT,
     event_url TEXT,
     event_type Event_Type
+);
+
+
+CREATE TABLE Friend_Relationship (
+    user1 INTEGER REFERENCES Users(id),
+    user2 INTEGER REFERENCES Users(id)
 );
