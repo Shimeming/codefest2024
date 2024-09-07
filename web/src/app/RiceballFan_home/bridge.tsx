@@ -60,11 +60,11 @@ export function GetUserFromApp(){
     console.log("flutterObject 不存在，無法執行操作。");
     GotUserLoc = "error-no-flutterObject";
   }
-
-  if(typeof (flutterObject )=== "undefined"){
-    console.log("error,exit");
-    return;
-  }
+  
+  // if(typeof flutterObject!== "undefined"){
+  //   console.log("error,exit");
+  //   return;
+  // }
   flutterObject.addEventListener("message",messageListener);
   flutterObject.postMessage(getUserInfoCommand);
   flutterObject.postMessage(getUserLaunchMap);
