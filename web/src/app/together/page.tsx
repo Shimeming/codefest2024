@@ -3,7 +3,7 @@ import ActivityCard from "./activity-card";
 
 const Page = () => {
   return (
-    <div className="mt-4 w-full px-4">
+    <div className="w-full">
       <div className="flex">
         <SearchBar
           placeholder="搜尋活動..."

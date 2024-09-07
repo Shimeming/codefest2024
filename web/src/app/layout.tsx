@@ -13,11 +13,13 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }): React.JSX.Element => {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen bg-primary-50">
+      <body className="flex flex-col min-h-screen bg-primary-50 w-full">
         <div className="w-full flex-none md:w-64">
           <NavBar />
         </div>
-        {children}
+        <div className="mt-5 px-4">
+          {children}
+        </div>
       </body>
     </html>
   );
