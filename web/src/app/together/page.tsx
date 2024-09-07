@@ -8,21 +8,25 @@ import clsx from "clsx";
 const activities: ActivityInfo[] = [
   {
     id: "1",
+    name: "漫畫裡的台北少年人：台北漫畫城市特展",
     image_url: "https://www.tcb.tw/prod/news/1003/288c89a2-4d90-4f75-b54f-27a37a6e3724.jpg",
     date: new Date('December 17, 2024 03:24:00')
   },
   {
     id: "2",
+    name: "活動二",
     image_url: "https://backstage.tpac-taipei.org/storage/uploads/program/series/images/73fdff80742a6bcb75612f07e19be328.jpg",
     date: new Date('December 19, 2024 03:24:00')
   },
   {
     id: "3",
+    name: "活動三",
     image_url: "https://www.tcb.tw/prod/news/1003/288c89a2-4d90-4f75-b54f-27a37a6e3724.jpg",
     date: new Date('December 21, 2024 03:24:00')
   },
   {
     id: "4",
+    name: "活動四",
     image_url: "https://www.tcb.tw/prod/news/1003/288c89a2-4d90-4f75-b54f-27a37a6e3724.jpg",
     date: new Date('December 23, 2024 03:24:00')
   },

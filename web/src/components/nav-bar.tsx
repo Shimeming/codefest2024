@@ -32,7 +32,7 @@ const NavBar = () => {
             className={clsx(
               'flex grow items-center justify-center gap-2 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600',
               {
-                'text-primary-500 border-b-4 border-primary-500': pathname === link.href,
+                'text-primary-500 border-b-4 border-primary-500': pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href)),
               },
             )}
           >
