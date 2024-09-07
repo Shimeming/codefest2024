@@ -56,6 +56,7 @@ export function GetUserFromApp(){
   // flutterObject 已存在，可以執行操作
   if (typeof flutterObject !== "undefined" && flutterObject) {
     GotUserLoc = "FlutterObject exists";
+
     if(typeof flutterObject=== "undefined"){
       console.log("error,exit");
       return;
@@ -70,8 +71,9 @@ export function GetUserFromApp(){
       console.log("wait for ok",3000);
     }
   } else {
+
     console.log("flutterObject 不存在，無法執行操作。");
-    GotUserLoc = "error-no-flutterObject QuQ trying next time";
+    GotUserLoc = "error-no-flutterObject QuQ lalala trying next time";
     return;
   }
 
