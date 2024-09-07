@@ -56,26 +56,25 @@ export function GetUserFromApp(){
   // flutterObject 已存在，可以執行操作
   if (typeof flutterObject !== "undefined" && flutterObject) {
     GotUserLoc = "FlutterObject exists";
+    if(typeof flutterObject=== "undefined"){
+      console.log("error,exit");
+      return;
+    }
+    flutterObject.addEventListener("message",messageListener);
+    flutterObject.postMessage(getUserInfoCommand);
+    flutterObject.postMessage(getUserLaunchMap);
+    flutterObject.postMessage(getUserLocCommand);
+    console.log("wait for ok",1000);
+    if(info_state !== true || loc_state !== true || map_state !== true){
+      //wait for ok
+      console.log("wait for ok",3000);
+    }
   } else {
     console.log("flutterObject 不存在，無法執行操作。");
     GotUserLoc = "error-no-flutterObject QuQ trying next time";
     return;
   }
 
-  if(typeof flutterObject=== "undefined"){
-    console.log("error,exit");
-    return;
-  }
-  flutterObject.addEventListener("message",messageListener);
-  flutterObject.postMessage(getUserInfoCommand);
-  flutterObject.postMessage(getUserLaunchMap);
-  flutterObject.postMessage(getUserLocCommand);
-  console.log("wait for ok",1000);
-  if(info_state !== true || loc_state !== true || map_state !== true){
-    //wait for ok
-    console.log("wait for ok",3000);
-
-  }
 
   return; 
 }
