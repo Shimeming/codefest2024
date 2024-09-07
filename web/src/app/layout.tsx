@@ -3,10 +3,10 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | CSIE Council',
-    default: 'CSIE Council',
+    template: '%s | Taipei Townder',
+    default: 'Taipei Townder',
   },
-  description: 'The database of NTU CSIE.',
+  description: '台北通裡的文藝交友軟體',
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }): React.JSX.Element => {

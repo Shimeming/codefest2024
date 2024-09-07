@@ -1,4 +1,4 @@
-import NavCards from '@/components/nav-cards';
+import NavCard from '@/components/nav-card';
 import { sql } from "@vercel/postgres";
 
 export type LatestInvoice = {
@@ -29,8 +29,8 @@ const Page = async () => {
 
   return (
     <>
-      <main className="pt-32">
-        <NavCards />
+      <main className="flex flex-col items-center pt-16">
+        <NavCard />
         <div>
           {latestInvoices.map((invoice) => (
             <div key={invoice.id}>
