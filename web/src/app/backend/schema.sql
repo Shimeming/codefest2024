@@ -42,6 +42,7 @@ CREATE TABLE Events (
     image_url TEXT,
     event_url TEXT,
     event_type Event_Type,
+    place TEXT,
     start_date DATE,
     end_date DATE 
 );
