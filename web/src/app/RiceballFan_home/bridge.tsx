@@ -39,6 +39,8 @@ const messageListener = (event: MessageEvent) => {
     else if(temp_json.name === "launch_map"){
       GotUserLaunchMap = temp_str;
       map_state = true;
+    // }else if (temp_json.name === "phone_number"){
+
     }
     else{
       console.log("error");
