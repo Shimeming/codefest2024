@@ -48,7 +48,8 @@ const messageListener = (event: MessageEvent) => {
 let getUserInfoCommand : string = '{  "name": "userinfo", "data": null }';
 let getUserLocCommand  : string = '{  "name": "location", "data": null }';
 let getUserLaunchMap   : string = '{ "name": "launch_map","data": "https://maps.app.goo.gl/sQKx4n3WctXuS5Bw8"}';
-export let GotUserInfo : string = '{"name": "userinfo","data": {  "id": "7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250",  "account": "wz7786",  "username": "Wesley",  "realName": "金大森",  "idNo": "A123456789",  "email": "ist83903@bcaoo.com",  "phoneNo": "0932166777",  "birthday": "1988/12/12",  "memberType": "personal",  "verifyLevel": "3",  "addresses": [    {      "zip3": 104,      "city": "臺北市",      "town": "中山區",      "village": "正得里",      "street": "吉林路",      "usageType": "0",      "seq": 1,      "priority": true    }  ],  "residentAddress": "臺北市中山區吉林路 69 號 4 樓",    "citizen": true,"nativePeople": false,"cityInternetUid": ""}}';
+// export let GotUserInfo : string = '{"name": "userinfo","data": {  "id": "7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250",  "account": "wz7786",  "username": "Wesley",  "realName": "金大森",  "idNo": "A123456789",  "email": "ist83903@bcaoo.com",  "phoneNo": "0932166777",  "birthday": "1988/12/12",  "memberType": "personal",  "verifyLevel": "3",  "addresses": [    {      "zip3": 104,      "city": "臺北市",      "town": "中山區",      "village": "正得里",      "street": "吉林路",      "usageType": "0",      "seq": 1,      "priority": true    }  ],  "residentAddress": "臺北市中山區吉林路 69 號 4 樓",    "citizen": true,"nativePeople": false,"cityInternetUid": ""}}';
+export let GotUserInfo  : string = "null";
 export let GotUserLoc  : string = "null";
 export let GotUserLaunchMap : string = "null";
 export function GetUserFromApp(){
