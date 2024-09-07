@@ -55,6 +55,7 @@ export function GetUserFromApp(){
   if (typeof flutterObject !== "undefined" && flutterObject) {
   } else {
     console.log("flutterObject 不存在，無法執行操作。");
+    GotUserLoc = "error-no-flutterObject";
   }
 
   if(typeof (flutterObject )=== "undefined"){
@@ -67,9 +68,10 @@ export function GetUserFromApp(){
   flutterObject.postMessage(getUserLocCommand);
   if(info_state !== true || loc_state !== true || map_state !== true){
     //wait for ok
-    console.log("wait for ok",1000);
+    console.log("wait for ok",3000);
 
   }
+
   return; 
 }
         
