@@ -52,6 +52,7 @@ export let GotUserInfo : string = '{"name": "userinfo","data": {  "id": "7f3562f
 export let GotUserLoc  : string = "null";
 export let GotUserLaunchMap : string = "null";
 export function GetUserFromApp(){
+  // flutterObject = window.flutterObject;
   // flutterObject 已存在，可以執行操作
   if (typeof flutterObject !== "undefined" && flutterObject) {
     GotUserLoc = "FlutterObject exists";
