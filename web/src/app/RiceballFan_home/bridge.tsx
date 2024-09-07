@@ -2,7 +2,7 @@
 
 import { info } from "console";
 import { resolve } from "path";
-declare let flutterObject: any;
+// declare let flutterObject: any;
 
 // let before_string 
 // 定義接收資料並處理的邏輯
