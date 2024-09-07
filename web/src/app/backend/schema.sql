@@ -47,8 +47,13 @@ CREATE TABLE Events (
     end_date DATE 
 );
 
-
-CREATE TABLE Friend_Relationship (
-    user1 INTEGER REFERENCES Users(id),
-    user2 INTEGER REFERENCES Users(id)
+CREATE TABLE Subscriptions (
+    subscriber INTEGER REFERENCES Users(id),
+    subscribee INTEGER REFERENCES Users(id),
+    PRIMARY KEY (subscriber, subscribee)
 );
+
+-- CREATE TABLE Group (
+--     event_id INTEGER REFERENCES Events(id),
+
+-- )
