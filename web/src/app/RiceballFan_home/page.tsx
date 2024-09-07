@@ -1,5 +1,5 @@
 
-import {GetUserFromApp,GotUserInfo , GotUserLaunchMap ,GotUserLoc} from "./bridge";
+import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc } from "./bridge";
 
 // function sendMessageToFlutter(message: string) {
 //   if (typeof window.flutterObject !== "undefined" && window.flutterObject) {
@@ -12,8 +12,8 @@ import {GetUserFromApp,GotUserInfo , GotUserLaunchMap ,GotUserLoc} from "./bridg
 // 調用函數
 // sendMessageToFlutter("Hello from web!");
 
-const Page =() => {
-    GetUserFromApp();
+const Page = () => {
+    // GetUserFromApp();
     return (
         <div>
             <h1>Test Page</h1>
