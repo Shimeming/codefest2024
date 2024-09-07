@@ -1,5 +1,5 @@
 'use client'
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { BsPersonAdd } from "react-icons/bs";
 import clsx from "clsx";
 import FunctionButton from "./function-button";
@@ -17,6 +17,8 @@ const ActivityCard = ({
   selectActivity: (select: boolean) => void;
 }) => {
   const [selectedDropdown, setSelectedDropdown] = useState<null | 'create' | 'list'>(null);
+  const [isLiked, setIsLiked] = useState(false); // State for tracking heart icon
+
   useEffect(() => {
     selectActivity(selectedDropdown !== null);
   }, [selectedDropdown])
@@ -40,12 +42,15 @@ const ActivityCard = ({
           >
             <IoList />
           </FunctionButton>
+
           <FunctionButton
             onClick={() => {
+              setIsLiked(!isLiked); // Toggle the like state
             }}
           >
-            <FaRegHeart />
+            {isLiked ? <FaHeart /> : <FaRegHeart />} {/* Conditionally render filled or outline heart */}
           </FunctionButton>
+
           <FunctionButton
             onClick={() => {
               selectedDropdown === 'create' ? setSelectedDropdown(null) : setSelectedDropdown('create');
