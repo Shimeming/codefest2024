@@ -59,6 +59,7 @@ export function GetUserFromApp(){
   } else {
     console.log("flutterObject 不存在，無法執行操作。");
     GotUserLoc = "error-no-flutterObject QuQ trying next time";
+    return;
   }
 
   if(typeof flutterObject=== "undefined"){
