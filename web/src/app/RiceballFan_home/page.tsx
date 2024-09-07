@@ -1,61 +1,43 @@
 'use client';
 import {useState ,useEffect} from "react";
-import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc , GotUserDevice,status_print} from "./bridge";
-
-// function sendMessageToFlutter(message: string) {
-//   if (typeof window.flutterObject !== "undefined" && window.flutterObject) {
-//     window.flutterObject.postMessage(message);
-//   } else {
-//     console.log("flutterObject 不存在，無法傳送訊息。");
-//   }
-// }
-
-// 調用函數
-// sendMessageToFlutter("Hello from web!");
-
-// const Page = () => {
-//     console.log("Waiting for flutterObject load...",2000);
-//     setTimeout(()=>{},2000);
-//     GetUserFromApp();
-//     return (
-//         <div>
-//             {/* <h1>User   Info</h1> */}
-//             {/* print GotUserInfo... on page */}
-//             <p>{GotUserInfo}</p>
-//             {/* <h1>Device Info</h1> */}
-//             {/* print GotUserLaunchMap... on page */}
-//             {/* <p>{GotUserDevice}</p> */}
-
-//             {/* <h1>User Location with lon and lat</h1> */}
-//             {/* print GotUserLoc... on page */}
-//             <p>{GotUserLoc}</p>
-
-//             {/* <p>{status_print}</p> */}
-
-//         </div>
-//     );
-// }
-// {/* <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
-// <script>
-//   // 初始化 vConsole
-//   var vConsole = new VConsole();
-//   console.log('Hello vConsole');
-// </script> */}
+import { GetUserFromApp, GotUserInfo, GotUserLoc , GotUserDevice,status_print} from "./bridge";
+// import mqtt , { MqttClient } from 'mqtt';
 const Page = () => {
+    
+
   const [userInfo, setUserInfo] = useState<string>("null");
   const [userLoc, setUserLoc] = useState<string>("null");
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+          // 持續監測變數變化
+        console.log("Interval check: GotUserInfo: ");
+        console.log("Interval check: GotUserLoc: ");
+          setUserInfo(GotUserInfo);
+          setUserLoc(GotUserLoc);
+        }, 1000); // 每0.1秒檢查一次狀態更新
+        return () => clearInterval(interval); // 清除計時器
+    }, []);
+    useEffect(() => {
+            GetUserFromApp();
+        }, []);
+    // 檢查狀態變化
+    useEffect(() => {
+        console.log("userInfo updated: ", userInfo);
+    }, [userInfo]); // 只在 userInfo 改變時執行
 
-  useEffect(() => {
-    GetUserFromApp();
-    const interval = setInterval(() => {
-      // 持續監測變數變化
-      setUserInfo(GotUserInfo);
-      setUserLoc(GotUserLoc);
-    }, 1000); // 每秒檢查一次狀態更新
+    useEffect(() => {
+        console.log("userLoc updated: ", userLoc);
+    }, [userLoc]); // 只在 userLoc 改變時執行
 
-    return () => clearInterval(interval); // 清除計時器
-  }, [GotUserInfo, GotUserLoc]);
-
+    // 檢查 status_print 和其他變量
+    useEffect(() => {
+        console.log("status_print: ", status_print);
+        console.log("GotUserInfo: ", GotUserInfo);
+        console.log("GotUserLoc: ", GotUserLoc);
+    }, []); // 只在第一次渲染時執行
+//   GetLocByuseEffect();
+//   GetUserInfoByuseEffect();
   return (
     <div>
       <p>{userInfo}</p>
@@ -63,7 +45,6 @@ const Page = () => {
     </div>
   );
 };
-
 
 export default Page;
 
