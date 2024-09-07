@@ -1,15 +1,42 @@
 'use client';
 import { useState, useEffect } from "react";
-let Function_Test : string = "null";
+class UserInfoLocArray{
+  
+  userName : string;
+  userId : string;
+  userLon : number;
+  userLat : number;
+  useridNo : string;
+  usertown : string;
+  usercity : string;
 
+  constructor(userName : string, userId : string, userLon : number, userLat : number, useridNo : string, usertown : string, usercity : string){
+    this.userName = userName;
+    this.userId = userId;
+    this.userLon = userLon;
+    this.userLat = userLat;
+    this.useridNo = useridNo;
+    this.usertown = usertown;
+    this.usercity = usercity;
+  }
+  toString():string {
+    return `{"userName": ${this.userName}, "userId": ${this.userId}, "userLon": ${this.userLon}, "userLat": ${this.userLat}, "useridNo": ${this.useridNo}, "usertown": ${this.usertown}, "usercity": ${this.usercity}}`;
+  }
+}
+let Function_Test : string = "null";
+let UserArrInfo : UserInfoLocArray = new UserInfoLocArray("null","null",0,0,"null","null","null");
 const Page = () => {
   const [userInfo, setUserInfo] = useState<string>("null");
   const [userLoc, setUserLoc] = useState<string>("null");
   const [state, setState] = useState<string>("null");
   const [functionTest, setFunctionTest] = useState<string>("null");
-  getClientInfo().then(result => {
-    Function_Test = result;
+  // getClientInfo().then(result => {
+  //   Function_Test = result;
+  // });
+  GetUserInfoArr().then(result => {
+    UserArrInfo = result;
   });
+  Function_Test = UserArrInfo.toString();
   // GetUserFromApp();
   useEffect(() => {
     // 設置一個 interval 來檢查 GotUserInfo 和 GotUserLoc 的變化
@@ -95,6 +122,40 @@ async function getClientInfo(): Promise<string> {
 
   });
 }
+
+
+async function GetUserInfoArr():Promise<UserInfoLocArray> {
+  GetUserFromApp();
+  return new Promise((resolve) => {
+    let outstring: string = "null";
+    const [userLoc, setUserLoc] = useState<string>("null");
+    const [userInfo, setUserInfo] = useState<string>("null");
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if (GotUserLoc !== userLoc) {
+          setUserLoc(GotUserLoc);
+        }
+        if (GotUserInfo !== userInfo) {
+          setUserInfo(GotUserInfo);
+        }
+        if (GotUserLoc !== "null" && GotUserInfo !== "null") {
+          // outstring = GotUserLoc;
+          // get json type data to deconstruct
+          let temp_json = JSON.parse(GotUserInfo);
+          let temp_json2 = JSON.parse(GotUserLoc);
+          let output = new UserInfoLocArray(temp_json.data.username,temp_json.data.id,temp_json2.data.longitude,temp_json2.data.latitude,temp_json.data.idNo,temp_json2.data.town,temp_json2.data.city);
+          resolve(output);
+          clearInterval(interval);
+          // resolve(outstring);
+        }
+      }, 500);
+      return () => clearInterval(interval);
+    }, [userLoc]);
+  });
+}
+
+
+
 // async function getClientInfo(): Promise<string> {
 //   // GetUserFromApp();
 //   let outstring : string = "null";
