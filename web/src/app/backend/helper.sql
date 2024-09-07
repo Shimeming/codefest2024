@@ -48,7 +48,7 @@ BEGIN
 END;
 $$ LANGUAGE PLPGSQL;
 
-CREATE OR REPLACE TYPE EventInfo AS (
+CREATE TYPE EventInfo AS (
     event_id INTEGER,
     name TEXT,
     image_url TEXT,
