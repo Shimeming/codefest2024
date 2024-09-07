@@ -174,6 +174,13 @@ extension MyServiceIdExt on MyServiceItemId {
           category: MyServiceCategory.explore,
           destinationUrl: '',
         ),
+        MyServiceItemId.zoo => MyServiceItem(
+          title: '台北Townder',
+          description: '發現台北的溫度',
+          icon: Assets.svg.iconTownder.svg(),
+          category: MyServiceCategory.explore,
+          destinationUrl: '',
+        ),
     };
   }
 }
