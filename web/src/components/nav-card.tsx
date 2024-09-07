@@ -36,6 +36,16 @@ const slides = [
 //   }
 // ];
 
+const getThumbnailUrl = (url: string): string | null => {
+  const match = url.match(/\/d\/([^\/]+)\//);
+  if (match) {
+    const fileId = match[1];
+    return `https://drive.google.com/thumbnail?id=${fileId}`;
+  }
+  return null;
+};
+
+
 const NavCard = ({ user }: { user: UserInfo }) => {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
 
@@ -57,6 +67,13 @@ const NavCard = ({ user }: { user: UserInfo }) => {
           id="scroll-container"
         >
           <div className="embla__container h-full">
+            <div className="embla__slide">
+              <img
+                src={getThumbnailUrl(user.image_url)}
+                className="w-full h-full object-cover"
+                alt={user.name}
+              />
+            </div>
             {slides.map((slide) => (
               <div className="embla__slide" key={slide.name}>
                 <img

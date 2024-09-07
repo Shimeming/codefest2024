@@ -13,7 +13,8 @@ BEGIN
     SELECT perference_score INTO user2_score
     FROM Users u
     WHERE u.id = user2;
-    
+
+    raise notice 'length = %', array_length(user1_score, 1);
     FOR i IN 1..array_length(user1_score, 1) 
     LOOP
         total_score := total_score + user1_score[i] * user2_score[i];
@@ -75,7 +76,7 @@ $$ LANGUAGE PLPGSQL;
 
 CREATE OR REPLACE FUNCTION Relation_Ranking(user_id INTEGER) RETURNS TABLE (
     id INTEGER, name TEXT, sex INTEGER, age INTEGER,
-    image_url TEXT[], motto TEXT,
+    image_url TEXT, motto TEXT,
     city TEXT, town TEXT,
     relative_score NUMERIC,
     distance NUMERIC,
