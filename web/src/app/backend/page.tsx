@@ -1,25 +1,39 @@
 import { sql } from "@vercel/postgres";
+export type UserInfo = {
+    id: string;
+    user_name: string;
+    real_name: string;
+    email: string;
+    sex: string;
+  };
+
+
+export type UserInfoRaw = Omit<UserInfo, 'amount'> & {
+    sex: number;
+  };
 
 const Page = async () => {
-    const data = await sql<any>`
-    SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
-    FROM invoices
-    JOIN customers ON invoices.customer_id = customers.id
-    ORDER BY invoices.date DESC
-    LIMIT 5`;
-    const latestInvoices = data.rows.map((invoice) => ({
-        ...invoice,
-        amount: invoice.amount,
+
+    const data = await sql<UserInfoRaw>`select * from Users`;
+
+    const users = data.rows.map((user) => ({
+        ...user,
+        sex: user.sex,
     }));
+    
+
     return (
         <div>
-            {latestInvoices.map((invoice) => (
-                <div key={invoice.id}>
-                    {invoice.id}
+            {users.map((user) => (
+                <div key={user.id}>
+                    {user.id}, {user.real_name}, {user.user_name}
                 </div>
             ))}
         </div>
     )
+    
 }
 
 export default Page;
+
+
