@@ -2,6 +2,8 @@
 
 import { info } from "console";
 import { resolve } from "path";
+declare let flutterObject: any;
+
 // let before_string 
 // 定義接收資料並處理的邏輯
 // const flutterObject = window.flutterObject;
@@ -13,6 +15,8 @@ import { resolve } from "path";
 //   )
 //   //Using Callback function to get message in flutterObject.data  
 // }
+// using 
+
 let info_state : boolean = false;
 let loc_state : boolean = false;
 let map_state : boolean   = false;
@@ -47,7 +51,13 @@ export let GotUserInfo : string;
 export let GotUserLoc  : string;
 export let GotUserLaunchMap : string;
 export function GetUserFromApp(){
-  if(flutterObject === "undefined"){
+  // flutterObject 已存在，可以執行操作
+  if (typeof flutterObject !== "undefined" && flutterObject) {
+  } else {
+    console.log("flutterObject 不存在，無法執行操作。");
+  }
+
+  if(typeof (flutterObject )=== "undefined"){
     console.log("error");
     return;
   }
