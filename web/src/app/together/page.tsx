@@ -13,7 +13,7 @@ const activities: ActivityInfo[] = [
   },
   {
     id: "2",
-    image_url: "https://www.tcb.tw/prod/news/1003/288c89a2-4d90-4f75-b54f-27a37a6e3724.jpg",
+    image_url: "https://backstage.tpac-taipei.org/storage/uploads/program/series/images/73fdff80742a6bcb75612f07e19be328.jpg",
     date: new Date('December 19, 2024 03:24:00')
   },
   {
