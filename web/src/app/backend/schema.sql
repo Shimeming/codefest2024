@@ -5,7 +5,7 @@ CREATE TABLE Users (
     real_name TEXT NOT NULL,
     sex INTEGER CHECK (sex IN (1, 2)),
     age INTEGER CHECK (age > 0),
-    image_url TEXT,
+    image_url TEXT[],
     motto TEXT,
 
     -- residential  address
