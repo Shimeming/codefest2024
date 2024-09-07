@@ -1,4 +1,4 @@
-
+'use client';
 import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc , status_print} from "./bridge";
 
 // function sendMessageToFlutter(message: string) {
@@ -31,6 +31,13 @@ const Page = () => {
         </div>
     );
 }
+{/* <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+<script>
+  // 初始化 vConsole
+  var vConsole = new VConsole();
+  console.log('Hello vConsole');
+</script> */}
+
 
 export default Page;
 
