@@ -28,6 +28,7 @@ enum MyServiceItemId {
   library,
   locationSearch,
   zoo,
+  townder,
   ;
 }
 
@@ -174,7 +175,7 @@ extension MyServiceIdExt on MyServiceItemId {
           category: MyServiceCategory.explore,
           destinationUrl: '',
         ),
-        MyServiceItemId.zoo => MyServiceItem(
+      MyServiceItemId.townder => MyServiceItem(
           title: '台北Townder',
           description: '發現台北的溫度',
           icon: Assets.svg.iconTownder.svg(),
