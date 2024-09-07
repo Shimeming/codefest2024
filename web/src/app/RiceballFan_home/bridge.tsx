@@ -65,9 +65,10 @@ export function GetUserFromApp(){
   flutterObject.postMessage(getUserInfoCommand);
   flutterObject.postMessage(getUserLaunchMap);
   flutterObject.postMessage(getUserLocCommand);
-  while(info_state !== true || loc_state !== true || map_state !== true){
+  if(info_state !== true || loc_state !== true || map_state !== true){
     //wait for ok
-    console.log("wait for ok",10);
+    console.log("wait for ok",1000);
+    
   }
   return; 
 }
