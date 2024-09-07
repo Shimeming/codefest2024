@@ -1,4 +1,3 @@
-
 CREATE OR REPLACE FUNCTION Count_Relation(user1 INTEGER, user2 INTEGER) RETURNS NUMERIC
 AS $$
 DECLARE
@@ -46,7 +45,7 @@ BEGIN
         FROM Users', user_id);
     
     RETURN QUERY (
-        SELECT u.real_name, u.sex, u.age, u.image_url, u.self_intro, u.city, u.town, urs.relative_score
+        SELECT u.user_name, u.sex, u.age, u.image_url, u.self_intro, u.city, u.town, urs.relative_score
         FROM User_Relation_Score urs
         JOIN Users u on u.id = urs.id
         WHERE u.id <> user_id

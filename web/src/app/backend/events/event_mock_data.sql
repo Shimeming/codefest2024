@@ -1,7 +1,7 @@
 INSERT INTO Events (name, image_url, event_url, event_type, place, start_date, end_date) VALUES
 ('漫畫裡的臺北少年人', 'https://www-ws.gov.taipei/001/Upload/686/relpic/10173/9262867/c07ccb5e-b1de-40e8-94f0-81f2e199bec0.jpg', 'https://culture.gov.taipei/News_Content.aspx?n=63F36AA6E434AD08&sms=78D644F2755ACCAA&s=9D57A40A382B4BD8', 'Art', '龍山文創基地B廣場', 2024-08-24, 2024-09-08),
 
-('2024臺北藝術節 The 2024 Taipei Arts Festival', 'https://backstage.tpac-taipei.org/storage/uploads/program/series/images/73fdff80742a6bcb75612f07e19be328.jpg', 'https://tpac.org.taipei/festival-taipei', 'Art', '臺北表演藝術中心', 2024-08-02, 2024-09-08)
+('2024臺北藝術節 The 2024 Taipei Arts Festival', 'https://backstage.tpac-taipei.org/storage/uploads/program/series/images/73fdff80742a6bcb75612f07e19be328.jpg', 'https://tpac.org.taipei/festival-taipei', 'Art', '臺北表演藝術中心', 2024-08-02, 2024-09-08),
 
 ('JAM JAM ASIA音樂節', 'https://trendy.taipei/wp-content/uploads/2024/07/JAM-JAM-ASIA-KV.jpg', 'https://trendy.taipei/jam-jam-asia/', 'Music', '臺北流行音樂中心', 2024-09-07, 2024-09-08),
 
