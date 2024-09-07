@@ -13,6 +13,7 @@ import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc , status_prin
 // sendMessageToFlutter("Hello from web!");
 
 const Page = () => {
+    console("Waiting for flutterObject load...",1000);
     GetUserFromApp();
     return (
         <div>
@@ -23,7 +24,7 @@ const Page = () => {
             <p>{GotUserLaunchMap}</p>
             {/* print GotUserLoc... on page */}
             <p>{GotUserLoc}</p>
-            
+
             <p>{status_print}</p>
 
         </div>
