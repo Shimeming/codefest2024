@@ -13,7 +13,7 @@ import { GetUserFromApp, GotUserInfo, GotUserLaunchMap, GotUserLoc , status_prin
 // sendMessageToFlutter("Hello from web!");
 
 const Page = () => {
-    console.log("Waiting for flutterObject load...",2000);
+    // console.log("Waiting for flutterObject load...",2000);
     // setTimeout(()=>{},2000);
     GetUserFromApp();
     return (
