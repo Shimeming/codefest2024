@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-export type UserInfo = {
+export type RawUserInfo = {
     name: string;
     sex: number;
     age: number;
@@ -10,26 +10,14 @@ export type UserInfo = {
     town: string;
 
     distance: number;
-    
-    
 };
 
-const Page = async () => {
+export const fetchUserInfos = async () => {
     const userID = 1;
-    const data = await sql<UserInfo>`select * from Relation_Ranking(${userID})`;
-
-    return (
-        <div>
-            {data.rows.map((user) => (
-                <div key={user.name}>
-                    {user.name}, {user.sex}, {user.age}, {user.image_url}, {user.motto}, {user.city}, {user.town}, {user.distance}
-                </div>
-            ))}
-        </div>
-    )
-    
+    const data = await sql<RawUserInfo>`select * from Relation_Ranking(${userID})`;
+    const userInfos = data.rows;
+    return userInfos;
 }
 
-export default Page;
 
 

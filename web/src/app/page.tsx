@@ -1,24 +1,16 @@
-import NavCard from '@/components/nav-card';
-
-export type LatestInvoice = {
-  id: string;
-  name: string;
-  image_url: string;
-  email: string;
-  amount: string;
-};
-
-export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
-  amount: number;
-};
-
+import NavCards from '@/components/nav-card';
+import { fetchUserInfos } from '@/lib/data';
 
 const Page = async () => {
+
+  const userInfos = await fetchUserInfos();
 
   return (
     <>
       <main className="flex flex-col items-center">
-        <NavCard />
+        <NavCards
+          users={userInfos}
+        />
       </main>
     </>
   );
