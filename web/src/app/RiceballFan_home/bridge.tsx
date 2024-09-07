@@ -47,9 +47,9 @@ const messageListener = (event: MessageEvent) => {
 let getUserInfoCommand : string = '{  "name": "userinfo", "data": null }';
 let getUserLocCommand  : string = '{  "name": "location", "data": null }';
 let getUserLaunchMap   : string = '{ "name": "launch_map","data": "https://maps.app.goo.gl/sQKx4n3WctXuS5Bw8"}';
-export let GotUserInfo : string;
-export let GotUserLoc  : string;
-export let GotUserLaunchMap : string;
+export let GotUserInfo : string = "null";
+export let GotUserLoc  : string = "null";
+export let GotUserLaunchMap : string = "null";
 export function GetUserFromApp(){
   // flutterObject 已存在，可以執行操作
   if (typeof flutterObject !== "undefined" && flutterObject) {
@@ -58,7 +58,7 @@ export function GetUserFromApp(){
   }
 
   if(typeof (flutterObject )=== "undefined"){
-    console.log("error");
+    console.log("error,exit");
     return;
   }
   flutterObject.addEventListener("message",messageListener);
@@ -68,7 +68,7 @@ export function GetUserFromApp(){
   if(info_state !== true || loc_state !== true || map_state !== true){
     //wait for ok
     console.log("wait for ok",1000);
-    
+
   }
   return; 
 }
