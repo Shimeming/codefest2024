@@ -58,13 +58,13 @@ export function GetUserFromApp(){
     GotUserLoc = "FlutterObject exists";
   } else {
     console.log("flutterObject 不存在，無法執行操作。");
-    GotUserLoc = "error-no-flutterObject\ntrying nexxt time";
+    GotUserLoc = "error-no-flutterObject QuQ trying next time";
   }
 
-  // if(typeof flutterObject!== "undefined"){
-  //   console.log("error,exit");
-  //   return;
-  // }
+  if(typeof flutterObject=== "undefined"){
+    console.log("error,exit");
+    return;
+  }
   flutterObject.addEventListener("message",messageListener);
   flutterObject.postMessage(getUserInfoCommand);
   flutterObject.postMessage(getUserLaunchMap);
