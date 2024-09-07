@@ -1,6 +1,18 @@
 import NavCards from '@/components/nav-cards';
 import { sql } from "@vercel/postgres";
 
+export type LatestInvoice = {
+  id: string;
+  name: string;
+  image_url: string;
+  email: string;
+  amount: string;
+};
+
+export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
+  amount: number;
+};
+
 
 const Page = async () => {
   const data = await sql<LatestInvoiceRaw>`
