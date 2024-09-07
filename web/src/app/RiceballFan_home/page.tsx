@@ -1,74 +1,61 @@
 'use client';
 import { useState, useEffect } from "react";
-
+let Function_Test : string = "null";
 
 const Page = () => {
-    const [userInfo, setUserInfo] = useState<string>("null");
-    const [userLoc, setUserLoc] = useState<string>("null");
-    const [state, setState] = useState<string>("null");
-    // const [userLoc2, setUserLoc2] = useState<string>("null");
-    // Update_auto();
-    // non_blocking().then(()=>{});
-    useEffect(() => {
-      // 呼叫 GetUserFromApp() 來觸發更新
-      GetUserFromApp();
-      console.log(userInfo);
-      setTimeout(() => {
-        console.log("In Timeout");
-        if(state === "ok"){
-          console.log("OK");
-        }
-      console.log("userInfo: ",userInfo);
-      console.log("userLoc: ",userLoc);
-    },5000);
-
+  const [userInfo, setUserInfo] = useState<string>("null");
+  const [userLoc, setUserLoc] = useState<string>("null");
+  const [state, setState] = useState<string>("null");
+  const [functionTest, setFunctionTest] = useState<string>("null");
+  getClientInfo().then(result => {
+    Function_Test = result;
+  });
+  // GetUserFromApp();
+  useEffect(() => {
     // 設置一個 interval 來檢查 GotUserInfo 和 GotUserLoc 的變化
     const interval = setInterval(() => {
       if (GotUserInfo !== userInfo) {
         setUserInfo(GotUserInfo);
-        // dumpMsg();
-        // setUserLoc2(GotUserInfo);
       }
       if (GotUserLoc !== userLoc) {
         setUserLoc(GotUserLoc);
-        // dumpMsg();
-        // setUserLoc2(GotUserLoc);
       }
       if(userInfo !== "null" && userLoc !== "null"){
+        // 關閉監聽
+        //Jenny Hu add code at here
+        
+        
+        
+        // code end
+        flutterObject.removeEventListener("message",messageListener);
+        
+      }
+      if(Function_Test !== "null"){
+        setFunctionTest(Function_Test);
         setState("ok");
       }
-      GotUserInfo = userInfo;
-      GotUserLoc = userLoc;
-      console.log("GotUserInfo: ");
-      console.log(GotUserInfo);
-      console.log("GotUserLoc: ");
-      console.log(GotUserLoc);
-    }, 500); // 每0.1秒檢查一次變化
-    
-    // 清除計時器
-    return () => clearInterval(interval);
-  },[userInfo, userLoc]);// [userInfo, userLoc]);
 
-      useEffect(() => {
-      if(userInfo !== "null" || userLoc !== "null"){
-        console.log("userInfo: ", userInfo);
-        console.log("userLoc: ", userLoc);
-      }
-      if (userInfo !== "null" && userLoc !== "null") {
-        setState("ok");
-      }
-      }, [userInfo, userLoc]);
-  // 確保每次渲染時都會輸出 console.log
-  // useEffect(() => {
-    // dumpMsg();
-  // }, [userInfo, userLoc]);
+    }, 500); // 每0.1秒檢查一次變化
+    // 清除計時器
+    
+    return () => clearInterval(interval);
+  },[userInfo, userLoc,functionTest]);// [userInfo, userLoc]);
+  //HTML blick
   return (
     <div>
+    
+    
+    
+    
+    
       <p>{userInfo}</p>
       <p>{userLoc}</p>
-      {/* <p>{GotUserInfo}</p>
-      <p>{GotUserLoc}</p> */}
-      {/* <p>{userLoc2}</p> */}
+      <p>{functionTest}</p>
+      <p>{state}</p>
+    
+    
+    
+    
     </div>
   ) 
 };
@@ -79,7 +66,63 @@ const dumpMsg = () => {
   console.log("GotUserLoc: ");
   console.log(GotUserLoc);
 };
+async function getClientInfo(): Promise<string> {
+  GetUserFromApp();
+  return new Promise((resolve) => {
+    let outstring: string = "null";
+    const [userInfo, setUserInfo] = useState<string>("null");
+    const [userLoc, setUserLoc] = useState<string>("null");
 
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if (GotUserInfo !== userInfo) {
+          setUserInfo(GotUserInfo);
+        }
+        if (GotUserLoc !== userLoc) {
+          setUserLoc(GotUserLoc);
+        }
+        if (GotUserInfo !== "null" && GotUserLoc !== "null") {
+          // 當 GotUserInfo 和 GotUserLoc 都更新時，組合出 outstring 並 resolve Promise
+          outstring = `{"info": ${GotUserInfo}, "loc": ${GotUserLoc}}`;
+          clearInterval(interval); // 停止 interval
+          resolve(outstring); // 回傳 outstring，結束 Promise
+        }
+      }, 500); // 每 0.5 秒檢查一次變化
+
+      // 清除計時器
+      return () => clearInterval(interval);
+    }, [userInfo, userLoc]); // 根據 userInfo 和 userLoc 的變化重新執行
+
+  });
+}
+// async function getClientInfo(): Promise<string> {
+//   // GetUserFromApp();
+//   let outstring : string = "null";
+//   const [userInfo, setUserInfo] = useState<string>("null");
+//   const [userLoc, setUserLoc] = useState<string>("null");
+//   useEffect(() => {
+//     // 設置一個 interval 來檢查 GotUserInfo 和 GotUserLoc 的變化
+//     const interval = setInterval(() => {
+//       if (GotUserInfo !== userInfo) {
+//         setUserInfo(GotUserInfo);
+//       }
+//       if (GotUserLoc !== userLoc) {
+//         setUserLoc(GotUserLoc);
+//       }
+//       if (GotUserInfo !== "null" && GotUserLoc !== "null") {
+//         // flutterObject.removeEventListener("message",messageListener);
+//         outstring = "{" + GotUserInfo + "," + GotUserLoc + "}";
+//       }
+        
+
+//     }, 500); // 每0.1秒檢查一次變化
+//     // 清除計時器
+    
+//     return () => clearInterval(interval);
+//   },[userInfo, userLoc]);// [userInfo, userLoc]);
+
+//   return outstring ; // Add a return statement at the end of the function
+// }
 
 
 const messageListener = (event: MessageEvent) => {
@@ -118,16 +161,16 @@ export function GetUserFromApp(){
   // flutterObject = window.flutterObject;
   // flutterObject 已存在，可以執行操作
   if (typeof flutterObject !== "undefined" && flutterObject) {
-    GotUserLoc = "FlutterObject exists";
-    flutterObject.addEventListener("message",messageListener);
-    flutterObject.postMessage(getUserInfoCommand);
-    // flutterObject.postMessage(getUserLaunchMap);
-    flutterObject.postMessage(getUserDevInfoCommand);
-    // flutterObject.postMessage(getUserDevInfoCommand);
-    flutterObject.postMessage(getUserLocCommand);
-  } else {
-      // console.log("flutterObject 不存在，無法執行操作。");
-      // GotUserLoc = "error-no-flutterObject QuQ lalala QQQ trying next time";
+    // GotUserLoc = "FlutterObject exists";
+      flutterObject.addEventListener("message",messageListener);
+      flutterObject.postMessage(getUserInfoCommand);
+      // flutterObject.postMessage(getUserLaunchMap);
+      // flutterObject.postMessage(getUserDevInfoCommand);
+      // flutterObject.postMessage(getUserDevInfoCommand);
+      flutterObject.postMessage(getUserLocCommand);
+    } else {
+      console.log("flutterObject 不存在，無法執行操作。");
+      GotUserLoc = "error-no-flutterObject QuQ lalala QQQ trying next time";
       return;
     }
     
@@ -135,44 +178,29 @@ export function GetUserFromApp(){
     return; 
   }
   
-  export default Page;
-  
-  
-  
-  // import { GetUserFromApp, GotUserInfo, GotUserLoc} from "./bridge";
-  // import {infoState,locState} from "./bridge";
-  // import { set } from "vue";
-  // async function Update_auto (){
-  //   for(let i = 0; i < 15; i++){
-  //       dumpMsg();
-  //       await delay(1000);
-  //     }
-  // } 
-  // function delay(ms: number) {
-  //     return new Promise( resolve => setTimeout(resolve, ms) );
-  // }
-  // 'use client';
-  // import {useState ,useEffect} from "react";
-  // import { GetUserFromApp, GotUserInfo, GotUserLoc , GotUserDevice,status_print} from "./bridge";
-  // // import mqtt , { MqttClient } from 'mqtt';
-  // const Page = () => {
-    //   console.log("Hiiiiiiiiiiiiiiii");
+export default Page;
+// 'use client';
+// import {useState ,useEffect} from "react";
+// import { GetUserFromApp, GotUserInfo, GotUserLoc , GotUserDevice,status_print} from "./bridge";
+// // import mqtt , { MqttClient } from 'mqtt';
+// const Page = () => {
+//   console.log("Hiiiiiiiiiiiiiiii");
 
 //   const [userInfo, setUserInfo] = useState<string>("null");
 //   const [userLoc, setUserLoc] = useState<string>("null");
-
+  
 //     useEffect(() => {
-  //       const interval = setInterval(() => {
-    //           // 持續監測變數變化
-    //         // console.log("Interval check: GotUserInfo: ");
-    //         // console.log("Interval check: GotUserLoc: ");
-    //           setUserInfo(GotUserInfo);
-    //           setUserLoc(GotUserLoc);
-    //         }, 100); // 每0.1秒檢查一次狀態更新
-    
-    //         return () => clearInterval(interval); // 清除計時器
-    //     }, []); // 只在 userInfo 或 userLoc 改變時執行
-    //     // useEffect(() => {
+//       const interval = setInterval(() => {
+//           // 持續監測變數變化
+//         // console.log("Interval check: GotUserInfo: ");
+//         // console.log("Interval check: GotUserLoc: ");
+//           setUserInfo(GotUserInfo);
+//           setUserLoc(GotUserLoc);
+//         }, 100); // 每0.1秒檢查一次狀態更新
+        
+//         return () => clearInterval(interval); // 清除計時器
+//     }, []); // 只在 userInfo 或 userLoc 改變時執行
+//     // useEffect(() => {
 //     //         GetUserFromApp();
 //     //     }, []);
 //     // // 檢查狀態變化
