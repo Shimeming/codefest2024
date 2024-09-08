@@ -26,6 +26,7 @@ const formatSex = (sex: number) => {
 export const fetchUserInfos = async (): Promise<UserInfo[]> => {
   const userID = 1;
   const data = await sql<RawUserInfo>`select * from Relation_Ranking(${userID})`;
+  console.log(data.rows);
   const userInfos = data.rows.map((userInfo) => ({
     ...userInfo,
     sex: formatSex(userInfo.sex),

@@ -48,6 +48,7 @@ const getThumbnailUrl = (url: string): string | null => {
 
 const NavCard = ({ user }: { user: UserInfo }) => {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
+  // console.log(user);
 
   return (
     <div className="
