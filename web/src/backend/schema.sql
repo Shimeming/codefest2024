@@ -5,7 +5,9 @@ CREATE TABLE Users (
     real_name TEXT NOT NULL,
     sex INTEGER CHECK (sex IN (1, 2)),
     age INTEGER CHECK (age > 0),
-    image_url TEXT,
+    image1 TEXT,
+    image2 TEXT,
+    image3 TEXT,
     motto TEXT,
 
     -- residential  address
@@ -47,8 +49,18 @@ CREATE TABLE Events (
     end_date DATE 
 );
 
+CREATE TABLE Subscriptions (
+    subscriber INTEGER REFERENCES Users(id),
+    subscribee INTEGER REFERENCES Users(id),
+    PRIMARY KEY (subscriber, subscribee)
+);
 
-CREATE TABLE Friend_Relationship (
-    user1 INTEGER REFERENCES Users(id),
-    user2 INTEGER REFERENCES Users(id)
+CREATE TABLE Group (
+    event_id INTEGER REFERENCES Events(id),
+    name TEXT NOT NULL,
+    owner INTEGER REFERENCES Users(id),
+    desired_date Date,
+    member INTEGER[],
+    pending INTEGER[],
+    max_num INTEGER
 );

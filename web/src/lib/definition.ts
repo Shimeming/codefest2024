@@ -5,7 +5,7 @@ export type UserInfo = {
   sex: string;
   district: string;
   motto?: string;
-  image_url: string;
+  image_urls: string[];
 };
 
 export type ActivityInfo = {
