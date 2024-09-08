@@ -58,10 +58,9 @@ CREATE TABLE Subscriptions (
 CREATE TABLE Group (
     event_id INTEGER REFERENCES Events(id),
     name TEXT NOT NULL,
-    leader INTEGER REFERENCES Users(id),
+    owner INTEGER REFERENCES Users(id),
     desired_date Date,
     member INTEGER[],
     pending INTEGER[],
     max_num INTEGER
-
-)
+);

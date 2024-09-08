@@ -67,19 +67,11 @@ const NavCard = ({ user }: { user: UserInfo }) => {
           id="scroll-container"
         >
           <div className="embla__container h-full">
-            <div className="embla__slide">
-              <img
-                src={getThumbnailUrl(user.image_url)}
-                className="w-full h-full object-cover"
-                alt={user.name}
-              />
-            </div>
-            {slides.map((slide) => (
-              <div className="embla__slide" key={slide.name}>
+            {user.image_urls.map((image_url) => (
+              <div className="embla__slide" key={image_url}>
                 <img
-                  src={slide.img}
+                  src={image_url}
                   className="w-full h-full object-cover"
-                  alt={slide.name}
                 />
               </div>
             ))}
