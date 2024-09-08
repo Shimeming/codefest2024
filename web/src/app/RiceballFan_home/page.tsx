@@ -1,16 +1,17 @@
 'use client';
 import { useState, useEffect } from "react";
+let Function_Test : string = "null";
 class UserInfoLocArray{
   
   userName : string;
   userId : string;
-  userLon : number;
-  userLat : number;
+  userLon : string;
+  userLat : string;
   useridNo : string;
   usertown : string;
   usercity : string;
 
-  constructor(userName : string, userId : string, userLon : number, userLat : number, useridNo : string, usertown : string, usercity : string){
+  constructor(userName : string, userId : string, userLon :string, userLat : string, useridNo : string, usertown : string, usercity : string){
     this.userName = userName;
     this.userId = userId;
     this.userLon = userLon;
@@ -23,20 +24,20 @@ class UserInfoLocArray{
     return `{"userName": ${this.userName}, "userId": ${this.userId}, "userLon": ${this.userLon}, "userLat": ${this.userLat}, "useridNo": ${this.useridNo}, "usertown": ${this.usertown}, "usercity": ${this.usercity}}`;
   }
 }
-let Function_Test : string = "null";
-let UserArrInfo : UserInfoLocArray = new UserInfoLocArray("null","null",0,0,"null","null","null");
+let UserArrInfos : UserInfoLocArray = new UserInfoLocArray("null","null","null","null","null","null","null");
 const Page = () => {
   const [userInfo, setUserInfo] = useState<string>("null");
   const [userLoc, setUserLoc] = useState<string>("null");
   const [state, setState] = useState<string>("null");
   const [functionTest, setFunctionTest] = useState<string>("null");
+  const [userArrInfo, setUserArrInfo] = useState<UserInfoLocArray>(UserArrInfos);
   // getClientInfo().then(result => {
   //   Function_Test = result;
   // });
   GetUserInfoArr().then(result => {
-    UserArrInfo = result;
+    UserArrInfos = result;
   });
-  Function_Test = UserArrInfo.toString();
+  Function_Test = UserArrInfos.toString();
   // GetUserFromApp();
   useEffect(() => {
     // 設置一個 interval 來檢查 GotUserInfo 和 GotUserLoc 的變化
@@ -57,35 +58,76 @@ const Page = () => {
         flutterObject.removeEventListener("message",messageListener);
         
       }
-      if(Function_Test !== "null"){
-        setFunctionTest(Function_Test);
-        setState("ok");
-      }
+      // if(Function_Test !== "null"){
+      //   setFunctionTest(Function_Test);
+      //   setState("ok");
+      // }
 
     }, 500); // 每0.1秒檢查一次變化
     // 清除計時器
     
     return () => clearInterval(interval);
-  },[userInfo, userLoc,functionTest]);// [userInfo, userLoc]);
+  // },[userInfo, userLoc,functionTest]);
+  },[userInfo, userLoc]);
+  useEffect(() => {
+    // userArrInfo = UserArrInfos;
+    const interval = setInterval(() => {
+    if(UserArrInfos !== userArrInfo){
+      setUserArrInfo(UserArrInfos);
+    }
+  },500);
+  },[userArrInfo]);
+
   //HTML blick
   return (
-    <div>
-    
-    
-    
-    
-    
-      <p>{userInfo}</p>
-      <p>{userLoc}</p>
-      <p>{functionTest}</p>
-      <p>{state}</p>
-    
-    
-    
-    
-    </div>
-  ) 
+<div style={{ fontFamily: 'pixel8a', backgroundColor: '#0ABAB5', color: '#ffffff', padding: '20px', borderRadius: '8px', maxWidth: '600px', margin: 'auto', marginTop: '50px' }}>
+    <h1>User Information</h1>
+    {userArrInfo ? (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '10px' }}>
+        <div style={blockStyle}>
+          <h2>Name:</h2>
+          <p>{userArrInfo.userName}</p>
+        </div>
+        <div style={blockStyle}>
+          <h2>ID:</h2>
+          <p>{userArrInfo.userId}</p>
+        </div>
+        <div style={blockStyle}>
+          <h2>Location:</h2>
+          <p>{userArrInfo.userLon}, {userArrInfo.userLat}</p>
+        </div>
+        <div style={blockStyle}>
+          <h2>ID Number:</h2>
+          <p>{userArrInfo.useridNo}</p>
+        </div>
+        <div style={blockStyle}>
+          <h2>Town:</h2>
+          <p>{userArrInfo.usertown}</p>
+        </div>
+        <div style={blockStyle}>
+          <h2>City:</h2>
+          <p>{userArrInfo.usercity}</p>
+        </div>
+      </div>
+    ) : (
+      <p>Loading user info...</p>
+    )}
+  </div>
+  ) ;
 };
+const blockStyle: React.CSSProperties = {
+  backgroundColor: '#ffffff',
+  color: '#000000',
+  padding: '10px',
+  borderRadius: '8px',
+  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
+};
+// <div>
+//   <p>{userInfo}</p>
+//   <p>{userLoc}</p>
+//   <p>{functionTest}</p>
+//   <p>{state}</p>
+// </div>
 
 const dumpMsg = () => {
   console.log("GotUserInfo: ");
@@ -143,10 +185,12 @@ async function GetUserInfoArr():Promise<UserInfoLocArray> {
           // get json type data to deconstruct
           let temp_json = JSON.parse(GotUserInfo);
           let temp_json2 = JSON.parse(GotUserLoc);
-          let output = new UserInfoLocArray(temp_json.data.username,temp_json.data.id,temp_json2.data.longitude,temp_json2.data.latitude,temp_json.data.idNo,temp_json2.data.town,temp_json2.data.city);
+          let output = new UserInfoLocArray(temp_json.data.realName,temp_json.data.id,temp_json2.data.longitude,temp_json2.data.latitude,temp_json.data.idNo,temp_json2.data.town,temp_json2.data.city);
           resolve(output);
-          clearInterval(interval);
-          // resolve(outstring);
+          // useEffect(() => {
+          // clearInterval(interval);
+          // // resolve(outstring);
+          // });
         }
       }, 500);
       return () => clearInterval(interval);

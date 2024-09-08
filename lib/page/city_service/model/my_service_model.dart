@@ -178,7 +178,8 @@ extension MyServiceIdExt on MyServiceItemId {
       MyServiceItemId.townder => MyServiceItem(
           title: 'Townder',
           description: '發現台北的溫度',
-          icon: Assets.svg.iconTownder.svg(),
+          // icon: Assets.svg.iconTownder.svg(),
+          icon: Assets.svg.iconZoo24.svg(),
           category: MyServiceCategory.explore,
           destinationUrl: '',
         ),

@@ -24,6 +24,7 @@ abstract final class TrendingServiceModel {
         title: 'Flutter_Web_Get_Info_Test ',
         // url: 'https://codefest2024.vercel.app/',
         // url: 'https://codefest2024.vercel.app/RiceballFan_home',
+        // url: 'http://localhost:3000/RiceballFan_home',
         url: 'http://10.0.2.2:3000/RiceballFan_home',
 
       ),
