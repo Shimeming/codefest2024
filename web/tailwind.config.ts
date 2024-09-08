@@ -21,9 +21,6 @@ const config: Config = {
       ]
     },
     extend: {
-      fontSize: {
-        h1: '1.75rem'
-      },
       colors: {
         primary: {
           50: '#edf8fa',
