@@ -1,10 +1,16 @@
-import NavCards from '@/components/nav-cards';
+import NavCards from '@/components/nav-card';
+import { fetchUserInfos } from '@/lib/data';
 
 const Page = async () => {
+
+  const userInfos = await fetchUserInfos();
+
   return (
     <>
-      <main className="pt-32">
-        <NavCards />
+      <main className="flex flex-col items-center">
+        <NavCards
+          users={userInfos}
+        />
       </main>
     </>
   );
