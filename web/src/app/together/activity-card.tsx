@@ -65,6 +65,7 @@ const ActivityCard = ({
           'absolute top-0 left-0',
           'transition-all opacity-0 ease-in-out duration-300',
           { 'opacity-100': selectedDropdown === 'create' },
+          { 'hidden': selectedDropdown !== 'create' },
           'w-full'
         )}>
           <CreateGroup
@@ -77,6 +78,7 @@ const ActivityCard = ({
           'absolute top-0 left-0',
           'transition-all opacity-0 ease-in-out duration-300',
           { 'opacity-100': selectedDropdown === 'list' },
+          { 'hidden': selectedDropdown !== 'list' },
           'w-full'
         )}>
           <GroupList 

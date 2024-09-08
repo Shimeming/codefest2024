@@ -1,9 +1,15 @@
+'use client';
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Import the stylesheet
 import clsx from "clsx";
 import { MdDateRange } from "react-icons/md";
 import { type ActivityInfo } from "@/lib/definition";
+
+function submitSearch(router: ReturnType<typeof useRouter>): void {
+  router.push('/together/1234'); // Use the router instance to push to the desired route
+}
 
 const CreateGroup = ({
   handleCreateGroup,
@@ -12,6 +18,7 @@ const CreateGroup = ({
   handleCreateGroup: () => void;
   activity: ActivityInfo
 }) => {
+  const router = useRouter(); // Initialize the router
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [maxParticipants, setMaxParticipants] = useState<number>(5); // Default to 5 participants
   const [teamName, setTeamName] = useState<string>(""); // Default to an empty string for team name
@@ -24,7 +31,10 @@ const CreateGroup = ({
     )}>
       <p className="text-xl">我要開團</p>
       <form
-        action={handleCreateGroup}
+        onSubmit={(e) => {
+          e.preventDefault(); // Prevent default form submission
+          submitSearch(router); // Call submitSearch with the router instance
+        }}
         className="flex flex-col gap-4"
       >
         <div className="grid grid-cols-[30%_70%] gap-x-2 gap-y-4">

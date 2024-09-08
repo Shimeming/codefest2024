@@ -1,6 +1,7 @@
 import { type Metadata } from 'next';
 import './globals.css';
 import NavBar from '@/components/nav-bar';
+import TopBar from '@/components/top-bar'; // This will be the new client-side component for the top bar
 
 export const metadata: Metadata = {
   title: {
@@ -14,6 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }): React.JSX.Elem
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-primary-50 w-full">
+        <TopBar /> {/* The new client component */}
         <div className="w-full flex-none md:w-64">
           <NavBar />
         </div>
