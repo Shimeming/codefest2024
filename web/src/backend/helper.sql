@@ -76,7 +76,7 @@ $$ LANGUAGE PLPGSQL;
 
 CREATE OR REPLACE FUNCTION Relation_Ranking(user_id INTEGER) RETURNS TABLE (
     id INTEGER, name TEXT, sex INTEGER, age INTEGER,
-    image_url TEXT, motto TEXT,
+    image1 TEXT, image2 TEXT, image3 TEXT, motto TEXT,
     city TEXT, town TEXT,
     relative_score NUMERIC,
     distance NUMERIC,
@@ -92,7 +92,7 @@ BEGIN
         FROM Users', user_id, user_id);
     
     RETURN QUERY (
-        SELECT u.id, u.user_name, u.sex, u.age, u.image_url, u.motto, u.city, u.town, 
+        SELECT u.id, u.user_name, u.sex, u.age, u.image1, u.image2, u.image3, u.motto, u.city, u.town, 
                 ur.relative_score, ur.distance, 
                 Get_Event_Info(u.favorite_event),
                 Get_Event_Info(u.interest_event)
@@ -106,3 +106,5 @@ BEGIN
 
 END;
 $$ LANGUAGE PLPGSQL;
+
+
