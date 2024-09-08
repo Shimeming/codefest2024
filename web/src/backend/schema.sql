@@ -53,7 +53,13 @@ CREATE TABLE Subscriptions (
     PRIMARY KEY (subscriber, subscribee)
 );
 
--- CREATE TABLE Group (
---     event_id INTEGER REFERENCES Events(id),
+CREATE TABLE Group (
+    event_id INTEGER REFERENCES Events(id),
+    name TEXT NOT NULL,
+    leader INTEGER REFERENCES Users(id),
+    desired_date Date,
+    member INTEGER[],
+    pending INTEGER[],
+    max_num INTEGER
 
--- )
+)
