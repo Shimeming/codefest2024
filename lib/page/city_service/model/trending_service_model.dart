@@ -17,7 +17,16 @@ abstract final class TrendingServiceModel {
       TrendingService(
         icon: Assets.svg.iconLocationSearch.svg(),
         title: '施工資訊',
-        url: '',
+        url: 'https://codefest2024.vercel.app/',
+      ),
+      TrendingService(
+        icon: Assets.svg.iconLocationSearch.svg(),
+        title: 'Flutter_Web_Get_Info_Test ',
+        // url: 'https://codefest2024.vercel.app/',
+        // url: 'https://codefest2024.vercel.app/RiceballFan_home',
+        // url: 'http://localhost:3000/RiceballFan_home',
+        url: 'http://10.0.2.2:3000/RiceballFan_home',
+
       ),
       // 在此列表後加入新熱門按鈕
       // add new trending service button here
